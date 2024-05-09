@@ -7,6 +7,7 @@ namespace Lab7.Repositories
         Task<bool> DoesProductExists(int id);
         Task<bool> DoesWarehouseExists(int id);
         Task<OrderDTO> GetOrderByProductId(int id);
-        Task updateOrderFullfilledDate(int id);
+        Task<bool> updateOrderFullfilledDate(int id);
+        Task insertProductWarehouse(AddProductWarehouse productWarehouse);
     }
 }

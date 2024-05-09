@@ -51,12 +51,12 @@ namespace Lab7.Repositories
         public async Task<OrderDTO> GetOrderByProductId(int id)
         {
             var query = @"SELECT o.IdOrder, o.IdProduct, o.Amount, o.CreatedAt, o.FulfilledAt, 
-                         p.Name AS ProductName, p.Description AS ProductDescription, p.Price AS ProductPrice
-                        FROM Order o
+                        p.Name AS ProductName, p.Description AS ProductDescription, p.Price AS ProductPrice
+                        FROM [Order] o
                         JOIN Product p ON o.IdProduct = p.IdProduct
                         WHERE p.IdProduct = @ID;";
 
-            using SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+            using SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("Default"));
             using SqlCommand command = new SqlCommand();
             command.Connection = connection;
             command.CommandText = query;
@@ -84,7 +84,7 @@ namespace Lab7.Repositories
                 IdOrder = reader.GetInt32(idOrderOrdinal),
                 Amount = reader.GetInt32(amountOrdinal),
                 CreatedAt = reader.GetDateTime(createdAtOrdinal),
-                FulfilledAt = reader.GetDateTime(fulfilledAtOrdinal),
+                FulfilledAt = reader.IsDBNull(fulfilledAtOrdinal) ? null : reader.GetDateTime(fulfilledAtOrdinal),
                 Product = new ProductDTO
                 {
                     Name = reader.GetString(productNameOrdinal),
@@ -96,13 +96,36 @@ namespace Lab7.Repositories
             return orderDTO;
         }
 
-        public async Task updateOrderFullfilledDate(int id)
+        public async Task insertProductWarehouse(AddProductWarehouse productWarehouse)
         {
-            var query = @"UPDATE Order
+            var query = @"INSERT INTO Product_Warehouse (IdWarehouse, IdProduct, IdOrder, Amount, Price, CreatedAt)
+                    SELECT @IdWarehouse, @IdProduct, o.IdOrder, @Amount, @Amount * p.Price, @CreatedAt
+                    FROM Product p
+                    JOIN [Order] o ON o.IdProduct = p.IdProduct
+                    WHERE p.IdProduct = @IdProduct";
+
+            using SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("Default"));
+            using SqlCommand command = new SqlCommand();
+            command.Connection = connection;
+            command.CommandText = query;
+
+            command.Parameters.AddWithValue("@IdWarehouse", productWarehouse.IdWarehouse);
+            command.Parameters.AddWithValue("@IdProduct", productWarehouse.IdProduct);
+            command.Parameters.AddWithValue("@Amount", productWarehouse.Amount);
+            command.Parameters.AddWithValue("@CreatedAt", DateTime.UtcNow);
+
+            await connection.OpenAsync();
+
+            await command.ExecuteScalarAsync();
+        }
+
+        public async Task<bool> updateOrderFullfilledDate(int id)
+        {
+            var query = @"UPDATE [Order]
                   SET FulfilledAt = @FulfilledAt
                   WHERE IdOrder = @OrderId";
 
-            using SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+            using SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("Default"));
             using SqlCommand command = new SqlCommand();
             command.Connection = connection;
             command.CommandText = query;
@@ -114,9 +137,7 @@ namespace Lab7.Repositories
 
             int rowsAffected = await command.ExecuteNonQueryAsync();
 
-            if (rowsAffected == 0)
-                throw new Exception($"Order not found");
-            
+            return rowsAffected > 0;
         }
     }
 }

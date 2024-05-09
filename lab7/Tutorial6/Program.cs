@@ -1,4 +1,4 @@
-using Tutorial6.Repositories;
+using Lab7.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +9,8 @@ builder.Services.AddSwaggerGen();
 
 // Add controllers functionality
 builder.Services.AddControllers();
-// Dependency injection for AnimalsRepository
-builder.Services.AddScoped<IAnimalsRepository, AnimalsRepository>();
+// Dependency injection for WarehouseRepository
+builder.Services.AddScoped<IWarehouseRepository, WarehouseRepository>();
 
 var app = builder.Build();
 
