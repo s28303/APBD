@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EuVz2eAyImZRxZrbf7X/JOesSZsA5kjrZ9DHnPIBJmvfci8EAQ3vnENW6LhTCvuAt+PB4mYZC2aUyWyisSbaBg==",
+  "dgSpecHash": "UpGZsOsE6xJZIHu+Xdw1sE8rYOx8cAeAHK+ARPOLhN3WyunZyLriT87NwM9y4SdDnRXakler601oziaRy0BDCw==",
   "success": true,
-  "projectFilePath": "C:\\PJATK\\APBD\\lab6\\lab06\\lab06\\lab06.csproj",
+  "projectFilePath": "C:\\PJATK\\APBD\\lab6\\lab06\\lab06.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vladk\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\vladk\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

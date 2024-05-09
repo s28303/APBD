@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\PJATK\\APBD\\lab6\\lab06\\lab06\\lab06.csproj": {}
+    "C:\\PJATK\\APBD\\lab6\\lab06\\lab06.csproj": {}
   },
   "projects": {
-    "C:\\PJATK\\APBD\\lab6\\lab06\\lab06\\lab06.csproj": {
+    "C:\\PJATK\\APBD\\lab6\\lab06\\lab06.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\PJATK\\APBD\\lab6\\lab06\\lab06\\lab06.csproj",
+        "projectUniqueName": "C:\\PJATK\\APBD\\lab6\\lab06\\lab06.csproj",
         "projectName": "lab06",
-        "projectPath": "C:\\PJATK\\APBD\\lab6\\lab06\\lab06\\lab06.csproj",
+        "projectPath": "C:\\PJATK\\APBD\\lab6\\lab06\\lab06.csproj",
         "packagesPath": "C:\\Users\\vladk\\.nuget\\packages\\",
-        "outputPath": "C:\\PJATK\\APBD\\lab6\\lab06\\lab06\\obj\\",
+        "outputPath": "C:\\PJATK\\APBD\\lab6\\lab06\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vladk\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -34,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
